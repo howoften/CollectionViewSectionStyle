@@ -33,7 +33,7 @@
         if ([delegate respondsToSelector:@selector(collectionView:layout:configModelForSection:)]) {
             model = [delegate collectionView:self.collectionView layout:self configModelForSection:i];
         }
-        if (model.decorateAreaKind == LLCollectionViewSectionDecorateAreaNone) continue;
+        if (model.decorateAreaKind == LLCollectionViewSectionDecorateAreaNone || model == nil) continue;
         NSArray *points = [self initialPointsForSection:i configModel:model];
         CGPoint mostLeftTopPoint = [points.firstObject CGPointValue];
         CGPoint mostRightBottomPoint = [points.lastObject CGPointValue];
@@ -94,9 +94,6 @@
         attr.zIndex = -1;
         attr.configModel = model;
         [self.decorationViewAttrs addObject:attr];
-        
-        NSLog(@"========%@", NSStringFromCGRect(attr.frame));
-        
         
         
     }
